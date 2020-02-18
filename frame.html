@@ -1,20 +1,48 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+  <title>Home page</title>
   <link rel="stylesheet" type="text/css" href="frame.css">
-</head>
 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"></script>
+
+</head>
+<body>
 <div class = "navbar" id = "bottomNavBar">
   <a href = "#home"> Home </a>
   <a href = "#search"> Search </a>
   <a href = "#likes"> Likes </a>
   <a href = "#cart"> Cart </a>
   <a href = "#user"> Profile </a>
+  <a href = "#posting" id="posting" onclick="openForm()">Post</a>
+  <a id="logout" href = "#">Logout</a>
   <a href="javascript:void(0);" class="icon" onclick="bottomNavBar()"> </a>
-<!bottomNavBar (onclick) is a function to run the bottom navigation bar.>
+<!--bottomNavBar (onclick) is a function to run the bottom navigation bar.-->
 </div>
 
-<! the function determines if the element is responsive or not:
+<div class = "form-popup" id ="myform">
+  <form class="form_content">
+    <h1>Post your product</h1>
+    <label for="product_name"><b>Product's name:</b></label><br>
+    <input type="text" placeholder="Enter your product's name" required><br>
+
+    <label for="product_description"><b>Description:</b></label><br>
+    <input type="text" placeholder="Describe your product..." required><br>
+
+    <label for="product_price"><b>Price:</b></label><br>
+    <input type="text" placeholder="Enter your product's price" required><br>
+    
+    <label for="product_photo"><b>Please upload product's photo:</b></label><br>
+    <input type="file" name="picture" accept="image/*"><br>
+
+    <button type="button" class="cancel" onclick="closeForm()">Cancel</button>
+  </form>
+</div>
+<!--the function determines if the element is responsive or not:
 function myFunction() {
   var x = document.getElementById("myNavbar");
   if (x.className === "navbar") {
@@ -23,32 +51,26 @@ function myFunction() {
     x.className = "navbar";
   }
 }
->
+-->
+<script src="/js/index.js"></script>
+<script>
+  firebase.auth().onAuthStateChanged(function(user)
+  {
+      if (!user)
+      {
+          window.location.href = "/signin.html";
+      }
+  });
+</script>
 
+<script>
+function openForm() {
+  document.getElementById("myform").style.display = "block";
+}
+function closeForm() {
+  document.getElementById("myform").style.display = "none";
+}
+</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
 </html>

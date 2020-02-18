@@ -1,3 +1,7 @@
+.form-popup {
+  display: none;
+  position: fixed;
+}
 .navbar {
   background-color: #333;
   overflow: hidden;
