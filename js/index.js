@@ -38,7 +38,53 @@ firebase.auth.Auth.Persistence.LOCAL;
       }
 
   });
+
   $("#logout").click(function()
   {
     firebase.auth().signOut();
   });
+
+  //Uploading data to the database
+
+
+  //Reference form collection
+  var messagesRef = firebase.database().ref('messages');
+
+  //Listen for form submit
+  document.getElementById("upload-form").addEventListener('submit', submitForm);
+
+  //Submit form
+  function submitForm(e)
+  {
+    e.preventDefault();
+    console.log(123)
+  
+    // Get values
+    var product = getInputVal("product");
+    var desc = getInputVal("description");
+    var price = getInputVal("price");
+    
+
+    console.log(product, desc, price + "On click\n");
+    saveMessage(product, desc, price)
+  };
+
+  function getInputVal(id)
+  {
+    return document.getElementById(id).value;
+  };
+
+  
+
+  //Save data to firebase
+  function saveMessage(product, desc, price){
+    var newMessageRef = messagesRef.push();
+    newMessageRef.set({
+      product: product,
+      desc: desc,
+      price: price
+    });
+  }
+  
+
+  
