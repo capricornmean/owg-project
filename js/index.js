@@ -67,14 +67,13 @@ firebase.auth.Auth.Persistence.LOCAL;
 
     console.log(product, desc, price + "On click\n");
     saveMessage(product, desc, price)
+
   };
 
   function getInputVal(id)
   {
     return document.getElementById(id).value;
   };
-
-  
 
   //Save data to firebase
   function saveMessage(product, desc, price){
@@ -86,6 +85,7 @@ firebase.auth.Auth.Persistence.LOCAL;
     });
   }
   
+ 
 
   function getMessage(){
     messagesRef.get().then(function(doc) {
