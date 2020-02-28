@@ -57,7 +57,6 @@ firebase.auth.Auth.Persistence.LOCAL;
   function submitForm(e)
   {
     e.preventDefault();
-    console.log(123)
   
     // Get values
     var product = getInputVal("product");
@@ -85,18 +84,24 @@ firebase.auth.Auth.Persistence.LOCAL;
     });
   }
   
- 
+  function createth(name){
+    return th;
+  }
 
   function getMessage(){
-    messagesRef.get().then(function(doc) {
-      if (doc.exists) {
-          console.log("Document data:", doc.data());
-      }
-      else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-      }
-    }).catch(function(error) {
-      console.log("Error getting document:", error);
+    var tbl = document.getElementById('table-data');
+    messagesRef.on("child_added", function(snapshot, prevChildKey) {
+      var curMessage = snapshot.val();
+      var tr = document.createElement('tr');
+      var td1 = document.createElement('td');
+      td1.appendChild(document.createTextNode(curMessage.product));
+      tr.appendChild(td1);
+      var td2 = document.createElement('td');
+      td2.appendChild(document.createTextNode(curMessage.desc));
+      tr.appendChild(td2);
+      var td3 = document.createElement('td');
+      td3.appendChild(document.createTextNode(curMessage.price));
+      tr.appendChild(td3);
+      tbl.appendChild(tr);
     });
   }
