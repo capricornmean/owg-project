@@ -3,7 +3,8 @@
   height: 100%;
   overflow-x: hidden;
   position: fixed;
-  padding-top: 10%;
+  padding-top: 15%;
+  padding-left: 20px;
   text-align: center;
   margin: 20px;
 
@@ -103,7 +104,13 @@ li a {
   text-decoration: none;
   letter-spacing: 13px;
   line-height: normal;
-  padding-top: 50px;
+  padding-top: 60px;
   font-size: 50px;
   font-family: "Times New Roman", Times, serif;
+}
+
+.logo {
+  float: left;
+  padding-left: 20px;
+  padding-top: 20px;
 }
