@@ -1,0 +1,109 @@
+.sideNavBar {
+  width: 100px;
+  height: 100%;
+  overflow-x: hidden;
+  position: fixed;
+  padding-top: 10%;
+  text-align: center;
+  margin: 20px;
+
+  margin-right: -1px;
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.sideNavBar a {
+  background-color: aliceblue;
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.sideNavBar a:hover {
+  background-color: thistle;
+  color: palevioletred;
+}
+
+.sideNavBar a.active {
+  background-color: palevioletred;
+  color: white;
+}
+
+.sideNavBar li {
+  float: center;
+  text align: center;
+  list-style-type: none;
+}
+
+.sideNavBar li a {
+  background-color: lightcyan;
+  color: palevioletred;
+  display: block;
+  padding: 15px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align:center;
+  color: #069;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  list-style-type: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  width: 50px;
+  background-color: lightblue;
+  color: palevioletred;
+}
+
+.sideNavBar .icon {
+  display: none;
+}
+
+.topNavBar {
+  width: 95%;
+  height: 100px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
+  text-align: right;
+  padding-right: 30%;
+  margin-right: 150px;
+  margin-top: 30px;
+}
+
+.topNavBar a{
+  background-color: aliceblue;
+  color: palevioletred;
+  float: right;
+  display: block;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.topNavBar a:hover {
+  background-color: thistle;
+  color: palevioletred;
+}
+
+.header {
+  color: palevioletred;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 13px;
+  line-height: normal;
+  padding-top: 50px;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+}

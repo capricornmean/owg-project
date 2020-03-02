@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="frame.css">
+
+  <style>
+  .searchBar {
+    border: 3px palevioletred;
+    width: 50%;
+    height: 50px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .searchForm {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .searchButton {
+    margin-left: auto;
+    margin-right: auto;
+    width = 150px;
+  }
+
+  </style>
+
+</head>
+
+
+<body style="background-color: thistle;">
+  <div class = "topNavBar">
+    <a href = "about"> About us </a>
+    <a href = "contact"> Contact </a>
+  </div>
+
+
+  <nav class = "sideNavBar" id = "side">
+    <ul>
+      <li> <a href = home_page.html> Home </a> </li>
+      <li> <a href = search.html class="active"> Search </a> </li>
+      <li> <a href = liked_items.html> Likes </a> </li>
+      <li> <a href = shopping_cart.html> Cart </a> </li>
+      <li> <a href = user_profile.html> Profile </a> </li>
+      <a href="javascript:void(0);" class="icon" onclick="bottomNavBar()"> </a>
+    </ul>
+  </nav>
+
+  <header class = "header"> search ! ! </header>
+
+  <div class = "searchForm">
+    <form id = "Search">
+      <p class = "searchBar">
+        <label for = "searchBar"> Enter keywords </label>
+        <input type = "text" id = "searchBox" placeholder="" = "items, brands, condition, etc.">
+      </p>
+
+
+      <fieldset id = "brands">
+        <legend> Brands </legend>
+          <input type = "checkbox" id = "gucci">
+          Gucci </input>
+          <input type = "checkbox" id = "lv">
+          Louis Vuitton </input>
+          <input type = "checkbox" id = "supreme">
+          Supreme </input>
+          <input type = "checkbox" id = "burberry">
+          Burberry </input>
+          <input type = "checkbox" id = "ripndip">
+          Rip N' Dip </input>
+          <input type = "checkbox" id = "moschino">
+          Moschino </input>
+          <input type = "checkbox" id = "mcm">
+          MCM </input>
+          <input type = "checkbox" id = "wephobia">
+          Wephobia </input>
+      </fieldset>
+
+      <fieldset id = "items">
+        <legend> Clothing items </legend>
+          <input type = "checkbox" id = "sweaters">
+          Sweaters </input>
+          <input type = "checkbox" id = "sneakers">
+          Sneakers </input>
+          <input type = "checkbox" id = "hoodies">
+          Hoodies </input>
+          <input type = "checkbox" id = "handbags">
+          Handbags </input>
+      </fieldset>
+
+      <fieldset id = "condition">
+        <legend> Condition </legend>
+          <input type = "checkbox" id = "new">
+          Brand new </input>
+          <input type = "checkbox" id = "good">
+          Good </input>
+          <input type = "checkbox" id = "average">
+          Average </input>
+          <input type = "checkbox" id = "worn">
+          Fairly worn </input>
+        </legend>
+      </fieldset>
+
+      <p class = "searchButton">
+        <input type = "submit"
+               id = "submitButton"
+               value = "search" />
+      </p>
+    </form>
+  </div>
+
+
+
+</body>
+
+<!-- the function determines if the element is responsive or not:
+function myFunction() {
+  var x = document.getElementById("myNavbar");
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+}
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
