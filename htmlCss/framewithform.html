@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="frame.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"> </script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"> </script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"> </script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"> </script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"> </script>
+  <script src="js/index.js"> </script>
+</head>
+
+<body style="background-color: thistle;">
+  <a href= home_page.html>
+    <img class = "logo" src=logo_transparent.png alt="OWG logo" height=100 width=165>
+  </a>
+
+  <div class = "topNavBar">
+    <a href = "about"> About us </a>
+    <a href = "contact"> Contact </a>
+  </div>
+
+  <nav class = "sideNavBar" id = "side">
+    <ul>
+      <li> <a href = home_page.html class="active"> Home </a> </li>
+      <li> <a href = search.html> Search </a> </li>
+      <li> <a href = liked_items.html> Likes </a> </li>
+      <li> <a href = shopping_cart.html> Cart </a> </li>
+      <li> <a href = user_profile.html> Profile </a> </li>
+      <li> <a href="javascript:void(0);" class="icon" onclick="bottomNavBar()"> </a> </li>
+      <li> <a id="logout" href = "#">Logout</a> </li>
+      <li> <a href="javascript:void(0);" class="icon" onclick="bottomNavBar()"> </a> </li>
+    </ul>
+  </nav>
+
+  <header class = "header"> post an item</header>
+
+  <form id = "upload-form">
+    <div class = "product_form" id = "form_body">
+      <label for="product_name"><b> Product's name: </b></label>
+      <br>
+      <input type="text" placeholder="Enter your product's name" required id="product">
+      <br>
+
+      <label for="product_description"><b>Description:</b></label>
+      <br>
+      <input type="text" placeholder="Describe your product..." required id="description">
+      <br>
+
+      <label for="product_price"><b>Price:</b></label><br>
+      <input type="text" placeholder="Enter your product's price" required id= "price">
+      <br>
+
+      <label for="product_photo"><b>Please upload product's photo:</b></label>
+      <br>
+      <input type="file" value ="upload" name="picture" accept="image/*" id="fileButton">
+      <br>
+
+      <button id="upload-post" type="submit">Submit</button>
+      <button type="button" class="cancel" onclick="closeForm()">Cancel</button>
+    </div>
+  </form>
+
+  <br>
+
+  <div id="result">
+    <table id = "table-data">
+      <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    //Upload and Save Images to Firebase Storage and Firebase Database**
+
+      //Get elements
+      var fileButton = document.getElementById('fileButton');
+
+      fileButton.addEventListener('change', function(e){
+        //Get file
+        var file = e.target.files[0];
+        //Create a storage reference
+        var storageRef = firebase.storage().ref("user_photo/" + file.name);
+
+        //Upload file to storage
+        storageRef.put(file);
+
+        //Get image URL
+        storageRef.child(file).getDownloadURL().then(function(imageURL){
+        var image_url = imageURL
+        })
+      });
+  </script>
+
+  <script>
+    function openForm() {
+      document.getElementById("myform").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myform").style.display = "none";
+    }
+
+    getMessage();
+  </script>
+
+
+  </body>
+
+</html>
