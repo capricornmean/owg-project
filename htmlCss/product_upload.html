@@ -7,7 +7,6 @@
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"> </script>
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"> </script>
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"> </script>
-  <script src="js/index.js"> </script>
 </head>
 
 <body style="background-color: thistle;">
@@ -24,6 +23,7 @@
     <ul>
       <li> <a href = home_page.html> Home </a> </li>
       <li> <a href = search.html> Search </a> </li>
+      <li> <a href = "#posting" id="posting" onclick="openForm()">Post</a></li>
       <li> <a href = liked_items.html> Likes </a> </li>
       <li> <a href = shopping_cart.html> Cart </a> </li>
       <li> <a href = user_profile.html class="active"> Profile </a> </li>
@@ -35,40 +35,35 @@
 
   <header class = "header"> post an item</header>
 
-  <form id = "upload-form">
-    <div class = "product_form" id = "form_body">
-      <label for="product_name"><b> Product's name: </b></label>
-      <br>
-      <input type="text" placeholder="Enter your product's name" required id="product">
-      <br>
-
-      <label for="product_description"><b>Description:</b></label>
-      <br>
-      <input type="text" placeholder="Describe your product..." required id="description">
-      <br>
-
+  <div class = "form-popup" id ="myform">
+    <form class="form_content" id = "upload-form">
+      <h1>Post your product</h1>
+      <label for="product_name"><b>Product's name:</b></label><br>
+      <input type="text" placeholder="Enter your product's name" required id="product"><br>
+  
+      <label for="product_description"><b>Description:</b></label><br>
+      <input type="text" placeholder="Describe your product..." required id="description"><br>
+  
       <label for="product_price"><b>Price:</b></label><br>
-      <input type="text" placeholder="Enter your product's price" required id= "price">
-      <br>
-
-      <label for="product_photo"><b>Please upload product's photo:</b></label>
-      <br>
-      <input type="file" value ="upload" name="picture" accept="image/*" id="fileButton">
-      <br>
-
+      <input type="text" placeholder="Enter your product's price" required id= "price"><br>
+      
+      <label for="product_photo"><b>Please upload product's photo:</b></label><br>
+      <input type="file" value ="upload" name="picture" accept="image/*" id="fileButton"><br>
+  
       <button id="upload-post" type="submit">Submit</button>
       <button type="button" class="cancel" onclick="closeForm()">Cancel</button>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <br>
 
   <div id="result">
-    <table id = "table-data">
+    <table id = "table-data" align="center">
       <tr>
         <th>Product</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Photo</th>
       </tr>
     </table>
   </div>
@@ -89,12 +84,13 @@
         storageRef.put(file);
 
         //Get image URL
-        storageRef.child(file).getDownloadURL().then(function(imageURL){
+        storageRef.child("user_photo/file.name").getDownloadURL().then(function(imageURL){
         var image_url = imageURL
         })
       });
   </script>
 
+  <script src="/js/index.js"></script>
   <script>
     function openForm() {
       document.getElementById("myform").style.display = "block";
@@ -106,6 +102,17 @@
 
     getMessage();
   </script>
+
+<script>
+  firebase.auth().onAuthStateChanged(function(user)
+  {
+      if (!user)
+      {
+          window.location.href = "/signin.html";
+      }
+  });
+
+</script>
 
 
   </body>
