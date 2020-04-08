@@ -23,7 +23,7 @@
     <ul>
       <li> <a href = home_page.html> Home </a> </li>
       <li> <a href = search.html> Search </a> </li>
-      <li> <a href = "#posting" id="posting" onclick="openForm()">Post</a></li>
+      <li> <a href = product_upload.html>Post</a></li>
       <li> <a href = liked_items.html> Likes </a> </li>
       <li> <a href = shopping_cart.html> Cart </a> </li>
       <li> <a href = user_profile.html class="active"> Profile </a> </li>
@@ -51,38 +51,22 @@
       <input type="file" value ="upload" name="picture" accept="image/*" id="fileButton"><br>
   
       <button id="upload-post" type="submit">Submit</button>
-      <button type="button" class="cancel" onclick="closeForm()">Cancel</button>
+      <button type="button" class="cancel">Cancel</button>
     </form>
   </div>
 
   <br>
-
-  <div id="result">
-    <table id = "table-data" align="center">
-      <tr>
-        <th>Product</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Photo</th>
-      </tr>
-    </table>
-  </div>
-
   <script>
     //Upload and Save Images to Firebase Storage and Firebase Database**
-
       //Get elements
       var fileButton = document.getElementById('fileButton');
-
       fileButton.addEventListener('change', function(e){
         //Get file
         var file = e.target.files[0];
         //Create a storage reference
         var storageRef = firebase.storage().ref("user_photo/" + file.name);
-
         //Upload file to storage
         storageRef.put(file);
-
         //Get image URL
         storageRef.child("user_photo/file.name").getDownloadURL().then(function(imageURL){
         var image_url = imageURL
@@ -91,29 +75,6 @@
   </script>
 
   <script src="/js/index.js"></script>
-  <script>
-    function openForm() {
-      document.getElementById("myform").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("myform").style.display = "none";
-    }
-
-    getMessage();
-  </script>
-
-<script>
-  firebase.auth().onAuthStateChanged(function(user)
-  {
-      if (!user)
-      {
-          window.location.href = "/signin.html";
-      }
-  });
-
-</script>
-
 
   </body>
 

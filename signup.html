@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>OwO Sign up</title>
+        <title>OwG Sign up</title>
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
@@ -18,10 +18,10 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"></script>
     </head>
     <body>
-        <div class="wrapper" style="background-image: url('IMG_1703.JPG');">
+        <div class="wrapper" style="background-image: url('images/IMG_1703.JPG');">
             <div class="inner">
                 <div class="image-holder">
-                    <img src="IMG_1707.JPG">
+                    <img src="images/IMG_1707.JPG">
                 </div>
                 <form action="">
                     <h3>Register</h3>
@@ -50,6 +50,30 @@
                 </form>
             </div>
         </div>
+
+        <script src="js/index.js">
+        </script>
+        
+        <script>
+            firebase.auth().onAuthStateChanged(function(user)
+            {
+                if (user)
+                {
+                    var userID = firebase.auth().currentUser.uid;
+                    firebase.database().ref("Users/" + userID).once("value").then(function(snapshot)
+                    {
+                        if(snapshot.val())
+                        {
+                            window.location.href = "htmlCss/home_page.html.html";
+                        }
+                        else
+                        {
+                            window.location.href = "accountSetting.html";
+                        }
+                    })
+                }
+            });
+        </script>
     </body>
 
 </html>
