@@ -114,7 +114,7 @@ firebase.auth.Auth.Persistence.LOCAL;
     var country = $("#country").val();
     var gender = $("#gender").val();
 
-    var rootRef = firebase.database().ref("User_Information").child("Users");
+    var rootRef = firebase.database().ref().child("User");
     var userID = firebase.auth().currentUser.uid;
     var usersRef = rootRef.child(userID);
 
