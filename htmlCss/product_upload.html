@@ -2,7 +2,10 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="frame.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"> </script>
+  <!-- Bootstrap
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"> </script>
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"> </script>
   <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"> </script>
@@ -48,8 +51,9 @@
       <input type="text" placeholder="Enter your product's price" required id= "price"><br>
       
       <label for="product_photo"><b>Please upload product's photo:</b></label><br>
-      <input type="file" value ="upload" name="picture" accept="image/*" id="fileButton"><br>
-  
+      <input type="file" value ="upload" name="picture" accept="image/*" id="main-image"><br>
+      <img id="selected-image" style="width: 50%">
+    
       <button id="upload-post" type="submit">Submit</button>
       <button type="button" class="cancel">Cancel</button>
     </form>
@@ -57,23 +61,32 @@
 
   <br>
   <script>
-    //Upload and Save Images to Firebase Storage and Firebase Database**
-      //Get elements
-      var fileButton = document.getElementById('fileButton');
-      fileButton.addEventListener('change', function(e){
-        //Get file
-        var file = e.target.files[0];
-        //Create a storage reference
-        var storageRef = firebase.storage().ref("user_photo/" + file.name);
-        //Upload file to storage
-        storageRef.put(file);
-        //Get image URL
-        storageRef.child("user_photo/file.name").getDownloadURL().then(function(imageURL){
-        var image_url = imageURL
-        })
-      });
-  </script>
 
+    //Upload and Save Images to Firebase Storage and Firebase Database**
+    var chosen_img = document.getElementById('main-image');
+    chosen_img.addEventListener('change', function(e){
+  
+        var file = e.target.files[0];
+      
+        var selected_file = file.name
+        var storageRef = firebase.storage().ref("user_photo/" + file.name);
+    
+        var uploadTask = storageRef.put(file);
+        console.log("File sent to storage")
+
+        uploadTask.then(function(){
+          var downloadURL = storageRef.getDownloadURL().then(function(url){
+          var img = document.getElementById('selected-image');
+          img.src = url;
+        }).catch(function(error) {
+          window.alert("Error!")
+          });
+        })
+      })
+        
+  
+  </script>
+  
   <script src="/js/index.js"></script>
 
   </body>

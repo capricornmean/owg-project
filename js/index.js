@@ -154,23 +154,27 @@ firebase.auth.Auth.Persistence.LOCAL;
     }
   });
 
+ 
+
   //Uploading data to the database
   //Reference form collection
   var messagesRef = firebase.database().ref('products');
   //Listen for form submit
   document.getElementById("upload-form").addEventListener('submit', submitForm);
   //Submit form
+
   function submitForm(e)
   {
     e.preventDefault();
     location.href = "home_page.html"
-    // Get values
+  
     var product = getInputVal("product");
     var desc = getInputVal("description");
     var price = getInputVal("price");
+    var image = document.getElementById("selected-image").src;
     
-    console.log(product, desc, price + "On click\n");
-    saveMessage(product, desc, price)
+    console.log(product, desc, price, image + "On click\n");
+    saveMessage(product, desc, price,image)
   };
 
   function getInputVal(id)
@@ -179,12 +183,13 @@ firebase.auth.Auth.Persistence.LOCAL;
   };
 
   //Save data to firebase
-  function saveMessage(product, desc, price){
+  function saveMessage(product, desc, price, image){
     var newMessageRef = messagesRef.push();
     newMessageRef.set({
       product: product,
       desc: desc,
-      price: price
+      price: price,
+      image: image
     });
   }
   
@@ -213,19 +218,24 @@ firebase.auth.Auth.Persistence.LOCAL;
   function getProduct(){
     var displayer = document.getElementById('display');
     messagesRef.on("child_added", function(snapshot, prevChildKey) {
-      var image = document.createElement("img");
-      image.setAttribute("src", "/images/IMG_7466_small.jpg");
-      image.setAttribute("width", "100%");
       var curMessage = snapshot.val();
+
+      var image = document.createElement("img");
+      image.setAttribute("src", curMessage.image);
+      image.setAttribute("width", "100%");
+
       var card = document.createElement('div');
       card.setAttribute("class", "card");
       var h1 = document.createElement('h1');
       h1.appendChild(document.createTextNode(curMessage.product));
+
       var description = document.createElement('p');
       description.appendChild(document.createTextNode(curMessage.desc));
+      
       var price = document.createElement('p');
       price.setAttribute("class", "price");
       price.appendChild(document.createTextNode(curMessage.price));
+      
       var button = document.createElement('button');
       button.innerHTML = "Add to Rent Cart";
       card.appendChild(image);
