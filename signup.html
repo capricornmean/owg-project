@@ -68,7 +68,13 @@
                         }
                         else
                         {
-                            window.location.href = "accountSetting.html";
+                            firebase.auth().currentUser.sendEmailVerification().then(function() {
+                                window.alert("An email has been sent to you. Please check and verify your email.");
+                                firebase.auth().signOut();
+                                window.location.href = "signin.html";
+                            }).catch(function(error) {
+                                window.alert("Message: " + error.message);
+                            });
                         }
                     });
                 }

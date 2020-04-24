@@ -20,9 +20,15 @@ firebase.auth.Auth.Persistence.LOCAL;
 
       if (email != "" && password != "")
       {
-        var result = firebase.auth().signInWithEmailAndPassword(email,password);
-
-        result.catch(function(error)
+        firebase.auth().signInWithEmailAndPassword(email,password).then(authUser => {
+          if(authUser.user.emailVerified){
+            window.location.href = "htmlCss/home_page.html";  
+          }else{
+            window.alert("Your email is not verified. Please verify before using.")
+            firebase.auth().signOut();
+            window.location.href = "signin.html";
+          }
+        }).catch(function(error)
         {
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -76,21 +82,20 @@ firebase.auth.Auth.Persistence.LOCAL;
       var password = $("#password").val();
       var cPassword = $("#confirmPassword").val();
 
-      if (email != "" && password != "" && password != "")
+      if (email != "" && password != "" && cPassword != "")
       {
         if (password == cPassword) 
         {
           var result = firebase.auth().createUserWithEmailAndPassword(email,password);
+          result.catch(function(error)
+          {
+              var errorCode = error.code;
+              var errorMessage = error.message;
 
-        result.catch(function(error)
-        {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-
-            console.log(errorCode);
-            console.log(errorMessage);
-            window.alert("Message : " + errorMessage);
-        });
+              console.log(errorCode);
+              console.log(errorMessage);
+              window.alert("Message : " + errorMessage);
+          });
         }
         else 
         {
