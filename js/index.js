@@ -82,20 +82,21 @@ firebase.auth.Auth.Persistence.LOCAL;
       var password = $("#password").val();
       var cPassword = $("#confirmPassword").val();
 
-      if (email != "" && password != "" && cPassword != "")
+      if (email != "" && password != "" && password != "")
       {
         if (password == cPassword) 
         {
           var result = firebase.auth().createUserWithEmailAndPassword(email,password);
-          result.catch(function(error)
-          {
-              var errorCode = error.code;
-              var errorMessage = error.message;
 
-              console.log(errorCode);
-              console.log(errorMessage);
-              window.alert("Message : " + errorMessage);
-          });
+        result.catch(function(error)
+        {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log(errorCode);
+            console.log(errorMessage);
+            window.alert("Message : " + errorMessage);
+        });
         }
         else 
         {
@@ -109,6 +110,7 @@ firebase.auth.Auth.Persistence.LOCAL;
 
   });
 
+  
   $("#btn-update").click(function()
   {
     var phone = $("#phone").val();
@@ -117,11 +119,12 @@ firebase.auth.Auth.Persistence.LOCAL;
     var fName = $("#firstName").val();
     var lName = $("#lastName").val();
     var country = $("#country").val();
-    var gender = $("#gender").val();
+    var gender = $("#gender").val(); 
 
     var rootRef = firebase.database().ref().child("User");
     var userID = firebase.auth().currentUser.uid;
     var usersRef = rootRef.child(userID);
+  
 
     if (fName !="" && lName !="" && country!="" && gender!="" && bio!="" && address!="" && phone!="") 
     {
@@ -232,7 +235,10 @@ firebase.auth.Auth.Persistence.LOCAL;
       var card = document.createElement('div');
       card.setAttribute("class", "card");
       var h1 = document.createElement('h1');
-      h1.appendChild(document.createTextNode(curMessage.product));
+      var a1 = document.createElement('a');
+      a1.setAttribute('href', 'product_view.html')
+      a1.appendChild(document.createTextNode(curMessage.product));
+      h1.appendChild(a1)
 
       var description = document.createElement('p');
       description.appendChild(document.createTextNode(curMessage.desc));
@@ -251,3 +257,38 @@ firebase.auth.Auth.Persistence.LOCAL;
       displayer.appendChild(card);
     });
   }
+
+  function getUserInfo(){
+    var profile = document.getElementById('profile');
+    var user = firebase.auth().currentUser;
+    console.log(user);
+    var userID = user.uid;
+    console.log(userID);
+    var userRef = firebase.database().ref("User/" + userID);
+    console.log(userRef);
+
+    userRef.once('value').then(function(snapshot) {
+      var curUser = snapshot.val();
+      console.log(curUser);
+
+      var fullName = document.createElement("h1");
+      fullName.appendChild(document.createTextNode(curUser.firstName + " " + curUser.lastName));
+
+      var email = document.createElement("h2");
+      email.appendChild(document.createTextNode(user.email));
+
+      var phone = document.createElement("h2");
+      phone.appendChild(document.createTextNode(curUser.phone));
+
+      /*var bio = document.createTextNode("p");
+      bio.appendChild(document.createTextNode(curUser.bio));*/
+
+      profile.appendChild(fullName);
+      profile.appendChild(email);
+      profile.appendChild(phone);
+      //profile.appendChild(bio);
+    })  
+  }
+  
+
+  

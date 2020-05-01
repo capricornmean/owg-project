@@ -5,7 +5,7 @@
 
   <style>
     div.profilepic {
-      display: block;
+      display: relative;
       margin-left: auto;
       margin-right: auto;
       margin-top: 30px;
@@ -14,7 +14,22 @@
       width: 20%;
     }
 
+    div.change_pic {
+      display: absolute;
+      margin-left: 50px;
+      margin-right: auto;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      border-radius: 50%;
+      width: 20%;
+    }
+
   </style>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"> </script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"> </script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"> </script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"> </script>
 
 </head>
 
@@ -45,12 +60,42 @@
   <header class = "header"> user profile </header>
 
   <div class = "profilepic">
-    <img id = "profilepic" src = "tsukki.png">
+    <img id = "profilepic" src = "tsukki.png" onmouseover="showing()">
+  </div>
+
+  <div class = "change_pic" id= "change">
+    <img id = "change_pic" src = "/images/camera.png" onmouseout="hiding()">
+  </div>
+
+  <div id = "profile" class="profile">
   </div>
 
 
 
 </body>
+<script src="/js/index.js"></script>
+<script>
+  firebase.auth().onAuthStateChanged(function(user){
+    if (user){
+      getUserInfo();
+    }
+  })
+
+  function hiding() {
+    x = document.getElementById("change_pic");
+    x.style.display = "none";
+    y = document.getElementById("profilepic");
+    y.style.display = "absolute";
+  }
+
+  function showing() {
+    x = document.getElementById("profilepic");
+    x.style.display = "none";
+    y = document.getElementById("change_pic");
+    y.style.display = "absolute";
+    console.log("not working")
+  }
+</script>
 
 <!-- the function determines if the element is responsive or not:
 function myFunction() {
